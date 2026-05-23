@@ -1,0 +1,1584 @@
+--
+-- PostgreSQL database dump
+--
+
+\restrict 0as7zf1RK4ws1vD2KDr4jj0kI3UsOtJwf1xNTIS6byvbhk5R3KB5FexWTP0MC1X
+
+-- Dumped from database version 18.3
+-- Dumped by pg_dump version 18.3
+
+-- Started on 2026-05-23 23:36:49
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 226 (class 1259 OID 17512)
+-- Name: Вектор угрозы; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Вектор угрозы" (
+    "id_ВУ" integer NOT NULL,
+    "Название" character varying(20) NOT NULL,
+    "Описание" text
+);
+
+
+ALTER TABLE public."Вектор угрозы" OWNER TO postgres;
+
+--
+-- TOC entry 225 (class 1259 OID 17511)
+-- Name: Вектор угрозы_id_ВУ_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Вектор угрозы_id_ВУ_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public."Вектор угрозы_id_ВУ_seq" OWNER TO postgres;
+
+--
+-- TOC entry 5080 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: Вектор угрозы_id_ВУ_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Вектор угрозы_id_ВУ_seq" OWNED BY public."Вектор угрозы"."id_ВУ";
+
+
+--
+-- TOC entry 222 (class 1259 OID 17486)
+-- Name: Должность; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Должность" (
+    "id_Д" integer NOT NULL,
+    "Название" character varying(30) NOT NULL,
+    "Описание" text
+);
+
+
+ALTER TABLE public."Должность" OWNER TO postgres;
+
+--
+-- TOC entry 221 (class 1259 OID 17485)
+-- Name: Должность_id_Д_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Должность_id_Д_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public."Должность_id_Д_seq" OWNER TO postgres;
+
+--
+-- TOC entry 5081 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: Должность_id_Д_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Должность_id_Д_seq" OWNED BY public."Должность"."id_Д";
+
+
+--
+-- TOC entry 232 (class 1259 OID 17545)
+-- Name: Инструкции для системы; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Инструкции для системы" (
+    "id_ИС" integer NOT NULL,
+    "Описание" text CONSTRAINT "Инструкции для сист_Описание_not_null" NOT NULL
+);
+
+
+ALTER TABLE public."Инструкции для системы" OWNER TO postgres;
+
+--
+-- TOC entry 231 (class 1259 OID 17544)
+-- Name: Инструкции для системы_id_ИС_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Инструкции для системы_id_ИС_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public."Инструкции для системы_id_ИС_seq" OWNER TO postgres;
+
+--
+-- TOC entry 5082 (class 0 OID 0)
+-- Dependencies: 231
+-- Name: Инструкции для системы_id_ИС_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Инструкции для системы_id_ИС_seq" OWNED BY public."Инструкции для системы"."id_ИС";
+
+
+--
+-- TOC entry 240 (class 1259 OID 17603)
+-- Name: Информационный актив; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Информационный актив" (
+    "id_ИА" integer NOT NULL,
+    "Название" character varying(100) CONSTRAINT "Информационный акти_Название_not_null" NOT NULL,
+    "Дата создания" date CONSTRAINT "Информационный_Дата создания_not_null" NOT NULL,
+    "Описание" text,
+    "Дата последнего изменения" date,
+    "id_ТипИА" integer NOT NULL
+);
+
+
+ALTER TABLE public."Информационный актив" OWNER TO postgres;
+
+--
+-- TOC entry 239 (class 1259 OID 17602)
+-- Name: Информационный актив_id_ИА_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Информационный актив_id_ИА_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public."Информационный актив_id_ИА_seq" OWNER TO postgres;
+
+--
+-- TOC entry 5083 (class 0 OID 0)
+-- Dependencies: 239
+-- Name: Информационный актив_id_ИА_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Информационный актив_id_ИА_seq" OWNED BY public."Информационный актив"."id_ИА";
+
+
+--
+-- TOC entry 246 (class 1259 OID 17701)
+-- Name: Инцидент; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Инцидент" (
+    "id_И" integer NOT NULL,
+    "Название" character varying(100) NOT NULL,
+    "id_С" integer NOT NULL,
+    "id_ИА" integer NOT NULL,
+    "Статус устранения" character varying(20) NOT NULL,
+    "Дата обнаружения" date NOT NULL,
+    "Дата устранения" date
+);
+
+
+ALTER TABLE public."Инцидент" OWNER TO postgres;
+
+--
+-- TOC entry 245 (class 1259 OID 17700)
+-- Name: Инцидент_id_И_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Инцидент_id_И_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public."Инцидент_id_И_seq" OWNER TO postgres;
+
+--
+-- TOC entry 5084 (class 0 OID 0)
+-- Dependencies: 245
+-- Name: Инцидент_id_И_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Инцидент_id_И_seq" OWNED BY public."Инцидент"."id_И";
+
+
+--
+-- TOC entry 238 (class 1259 OID 17584)
+-- Name: Меры устранения; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Меры устранения" (
+    "id_МУ" integer NOT NULL,
+    "id_ИС" integer NOT NULL,
+    "Название" character varying(20) NOT NULL,
+    "Описание" text,
+    "Плановая дата устранения" date CONSTRAINT "Меры устранени_Плановая дата _not_null" NOT NULL,
+    "Фактическая дата устранения" date CONSTRAINT "Меры устранени_Фактическая д_not_null" NOT NULL
+);
+
+
+ALTER TABLE public."Меры устранения" OWNER TO postgres;
+
+--
+-- TOC entry 237 (class 1259 OID 17583)
+-- Name: Меры устранения_id_МУ_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Меры устранения_id_МУ_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public."Меры устранения_id_МУ_seq" OWNER TO postgres;
+
+--
+-- TOC entry 5085 (class 0 OID 0)
+-- Dependencies: 237
+-- Name: Меры устранения_id_МУ_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Меры устранения_id_МУ_seq" OWNED BY public."Меры устранения"."id_МУ";
+
+
+--
+-- TOC entry 242 (class 1259 OID 17621)
+-- Name: Ответственный сотрудник; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Ответственный сотрудник" (
+    "id_С" integer NOT NULL,
+    "Имя" character varying(50) NOT NULL,
+    "Фамилия" character varying(50) CONSTRAINT "Ответственный сотруд_Фамилия_not_null" NOT NULL,
+    "Отчество" character varying(50),
+    "Дата рождения" date CONSTRAINT "Ответственный _Дата рождения_not_null" NOT NULL,
+    "id_Д" integer NOT NULL,
+    "id_П" integer NOT NULL,
+    email character varying(30) NOT NULL,
+    "Номер телефона" character varying(20) CONSTRAINT "Ответственный _Номер телефон_not_null" NOT NULL,
+    "Логин" character varying(30) CONSTRAINT "Ответственный сотрудни_Логин_not_null" NOT NULL,
+    "Хэш пароля" character varying(30) CONSTRAINT "Ответственный сот_Хэш пароля_not_null" NOT NULL,
+    CONSTRAINT "Ответственный с_Номер телефона_check" CHECK ((("Номер телефона")::text ~ '^[0-9]+$'::text)),
+    CONSTRAINT "Ответственный сотру_Хэш пароля_check" CHECK ((("Хэш пароля")::text ~ '^[0-9a-fA-F]+$'::text))
+);
+
+
+ALTER TABLE public."Ответственный сотрудник" OWNER TO postgres;
+
+--
+-- TOC entry 241 (class 1259 OID 17620)
+-- Name: Ответственный сотрудник_id_С_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Ответственный сотрудник_id_С_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public."Ответственный сотрудник_id_С_seq" OWNER TO postgres;
+
+--
+-- TOC entry 5086 (class 0 OID 0)
+-- Dependencies: 241
+-- Name: Ответственный сотрудник_id_С_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Ответственный сотрудник_id_С_seq" OWNED BY public."Ответственный сотрудник"."id_С";
+
+
+--
+-- TOC entry 224 (class 1259 OID 17497)
+-- Name: Подразделение; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Подразделение" (
+    "id_П" integer NOT NULL,
+    "Название" character varying(30) NOT NULL,
+    "Описание" text,
+    "Адрес" character varying(50) NOT NULL,
+    "Номер телефона" character varying(20) NOT NULL,
+    email character varying(30) NOT NULL,
+    CONSTRAINT "Подразделение_Номер телефона_check" CHECK ((("Номер телефона")::text ~ '^[0-9]+$'::text))
+);
+
+
+ALTER TABLE public."Подразделение" OWNER TO postgres;
+
+--
+-- TOC entry 223 (class 1259 OID 17496)
+-- Name: Подразделение_id_П_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Подразделение_id_П_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public."Подразделение_id_П_seq" OWNER TO postgres;
+
+--
+-- TOC entry 5087 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: Подразделение_id_П_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Подразделение_id_П_seq" OWNED BY public."Подразделение"."id_П";
+
+
+--
+-- TOC entry 248 (class 1259 OID 17734)
+-- Name: Связь_Угроза_Уязвимость; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Связь_Угроза_Уязвимость" (
+    "id_СВ" integer NOT NULL,
+    "id_У" integer NOT NULL,
+    "id_УГ" integer NOT NULL
+);
+
+
+ALTER TABLE public."Связь_Угроза_Уязвимость" OWNER TO postgres;
+
+--
+-- TOC entry 247 (class 1259 OID 17733)
+-- Name: Связь_Угроза_Уязвимость_id_СВ_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Связь_Угроза_Уязвимость_id_СВ_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public."Связь_Угроза_Уязвимость_id_СВ_seq" OWNER TO postgres;
+
+--
+-- TOC entry 5088 (class 0 OID 0)
+-- Dependencies: 247
+-- Name: Связь_Угроза_Уязвимость_id_СВ_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Связь_Угроза_Уязвимость_id_СВ_seq" OWNED BY public."Связь_Угроза_Уязвимость"."id_СВ";
+
+
+--
+-- TOC entry 250 (class 1259 OID 17754)
+-- Name: Связь_Уязвимость_Инцидент; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Связь_Уязвимость_Инцидент" (
+    "id_СВ" integer CONSTRAINT "Связь_Уязвимость_Инциден_id_СВ_not_null" NOT NULL,
+    "id_У" integer NOT NULL,
+    "id_И" integer NOT NULL
+);
+
+
+ALTER TABLE public."Связь_Уязвимость_Инцидент" OWNER TO postgres;
+
+--
+-- TOC entry 249 (class 1259 OID 17753)
+-- Name: Связь_Уязвимость_Инцидент_id_СВ_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Связь_Уязвимость_Инцидент_id_СВ_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public."Связь_Уязвимость_Инцидент_id_СВ_seq" OWNER TO postgres;
+
+--
+-- TOC entry 5089 (class 0 OID 0)
+-- Dependencies: 249
+-- Name: Связь_Уязвимость_Инцидент_id_СВ_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Связь_Уязвимость_Инцидент_id_СВ_seq" OWNED BY public."Связь_Уязвимость_Инцидент"."id_СВ";
+
+
+--
+-- TOC entry 236 (class 1259 OID 17567)
+-- Name: Способ обнаружения; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Способ обнаружения" (
+    "id_СО" integer NOT NULL,
+    "Название" character varying(20) NOT NULL,
+    "id_ТипСО" integer NOT NULL,
+    "Дата последнего сканирования" date CONSTRAINT "Способ обнаруж_Дата последне_not_null" NOT NULL,
+    "Дата последнего обнаружения" date CONSTRAINT "Способ обнару_Дата последне_not_null1" NOT NULL
+);
+
+
+ALTER TABLE public."Способ обнаружения" OWNER TO postgres;
+
+--
+-- TOC entry 235 (class 1259 OID 17566)
+-- Name: Способ обнаружения_id_СО_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Способ обнаружения_id_СО_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public."Способ обнаружения_id_СО_seq" OWNER TO postgres;
+
+--
+-- TOC entry 5090 (class 0 OID 0)
+-- Dependencies: 235
+-- Name: Способ обнаружения_id_СО_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Способ обнаружения_id_СО_seq" OWNED BY public."Способ обнаружения"."id_СО";
+
+
+--
+-- TOC entry 220 (class 1259 OID 17475)
+-- Name: Тип ИА; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Тип ИА" (
+    "id_ТипИА" integer NOT NULL,
+    "Название" character varying(20) NOT NULL,
+    "Описание" text
+);
+
+
+ALTER TABLE public."Тип ИА" OWNER TO postgres;
+
+--
+-- TOC entry 219 (class 1259 OID 17474)
+-- Name: Тип ИА_id_ТипИА_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Тип ИА_id_ТипИА_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public."Тип ИА_id_ТипИА_seq" OWNER TO postgres;
+
+--
+-- TOC entry 5091 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: Тип ИА_id_ТипИА_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Тип ИА_id_ТипИА_seq" OWNED BY public."Тип ИА"."id_ТипИА";
+
+
+--
+-- TOC entry 230 (class 1259 OID 17534)
+-- Name: Тип Способа обнаружения; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Тип Способа обнаружения" (
+    "id_ТипСО" integer CONSTRAINT "Тип Способа обнаружен_id_ТипСО_not_null" NOT NULL,
+    "Название" character varying(20) CONSTRAINT "Тип Способа обнаруж_Название_not_null" NOT NULL,
+    "Описание" text
+);
+
+
+ALTER TABLE public."Тип Способа обнаружения" OWNER TO postgres;
+
+--
+-- TOC entry 229 (class 1259 OID 17533)
+-- Name: Тип Способа обнаружения_id_ТипСО_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Тип Способа обнаружения_id_ТипСО_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public."Тип Способа обнаружения_id_ТипСО_seq" OWNER TO postgres;
+
+--
+-- TOC entry 5092 (class 0 OID 0)
+-- Dependencies: 229
+-- Name: Тип Способа обнаружения_id_ТипСО_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Тип Способа обнаружения_id_ТипСО_seq" OWNED BY public."Тип Способа обнаружения"."id_ТипСО";
+
+
+--
+-- TOC entry 234 (class 1259 OID 17556)
+-- Name: Угроза; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Угроза" (
+    "id_УГ" integer NOT NULL,
+    "Название" character varying(20) NOT NULL,
+    "Описание" text
+);
+
+
+ALTER TABLE public."Угроза" OWNER TO postgres;
+
+--
+-- TOC entry 233 (class 1259 OID 17555)
+-- Name: Угроза_id_УГ_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Угроза_id_УГ_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public."Угроза_id_УГ_seq" OWNER TO postgres;
+
+--
+-- TOC entry 5093 (class 0 OID 0)
+-- Dependencies: 233
+-- Name: Угроза_id_УГ_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Угроза_id_УГ_seq" OWNED BY public."Угроза"."id_УГ";
+
+
+--
+-- TOC entry 228 (class 1259 OID 17523)
+-- Name: Уровень критичности; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Уровень критичности" (
+    "id_УК" integer NOT NULL,
+    "Название" character varying(35) NOT NULL,
+    "Описание" text
+);
+
+
+ALTER TABLE public."Уровень критичности" OWNER TO postgres;
+
+--
+-- TOC entry 227 (class 1259 OID 17522)
+-- Name: Уровень критичности_id_УК_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Уровень критичности_id_УК_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public."Уровень критичности_id_УК_seq" OWNER TO postgres;
+
+--
+-- TOC entry 5094 (class 0 OID 0)
+-- Dependencies: 227
+-- Name: Уровень критичности_id_УК_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Уровень критичности_id_УК_seq" OWNED BY public."Уровень критичности"."id_УК";
+
+
+--
+-- TOC entry 244 (class 1259 OID 17651)
+-- Name: Уязвимость; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Уязвимость" (
+    "id_У" integer NOT NULL,
+    "Название" character varying(30) NOT NULL,
+    "Время события" timestamp without time zone NOT NULL,
+    "id_МУ" integer NOT NULL,
+    "id_УК" integer NOT NULL,
+    "id_СО" integer NOT NULL,
+    "id_ВУ" integer NOT NULL,
+    "Дата регистрации" date NOT NULL,
+    "Описание" text
+);
+
+
+ALTER TABLE public."Уязвимость" OWNER TO postgres;
+
+--
+-- TOC entry 243 (class 1259 OID 17650)
+-- Name: Уязвимость_id_У_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Уязвимость_id_У_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public."Уязвимость_id_У_seq" OWNER TO postgres;
+
+--
+-- TOC entry 5095 (class 0 OID 0)
+-- Dependencies: 243
+-- Name: Уязвимость_id_У_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Уязвимость_id_У_seq" OWNED BY public."Уязвимость"."id_У";
+
+
+--
+-- TOC entry 4833 (class 2604 OID 17515)
+-- Name: Вектор угрозы id_ВУ; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Вектор угрозы" ALTER COLUMN "id_ВУ" SET DEFAULT nextval('public."Вектор угрозы_id_ВУ_seq"'::regclass);
+
+
+--
+-- TOC entry 4831 (class 2604 OID 17489)
+-- Name: Должность id_Д; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Должность" ALTER COLUMN "id_Д" SET DEFAULT nextval('public."Должность_id_Д_seq"'::regclass);
+
+
+--
+-- TOC entry 4836 (class 2604 OID 17548)
+-- Name: Инструкции для системы id_ИС; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Инструкции для системы" ALTER COLUMN "id_ИС" SET DEFAULT nextval('public."Инструкции для системы_id_ИС_seq"'::regclass);
+
+
+--
+-- TOC entry 4840 (class 2604 OID 17606)
+-- Name: Информационный актив id_ИА; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Информационный актив" ALTER COLUMN "id_ИА" SET DEFAULT nextval('public."Информационный актив_id_ИА_seq"'::regclass);
+
+
+--
+-- TOC entry 4843 (class 2604 OID 17704)
+-- Name: Инцидент id_И; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Инцидент" ALTER COLUMN "id_И" SET DEFAULT nextval('public."Инцидент_id_И_seq"'::regclass);
+
+
+--
+-- TOC entry 4839 (class 2604 OID 17587)
+-- Name: Меры устранения id_МУ; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Меры устранения" ALTER COLUMN "id_МУ" SET DEFAULT nextval('public."Меры устранения_id_МУ_seq"'::regclass);
+
+
+--
+-- TOC entry 4841 (class 2604 OID 17624)
+-- Name: Ответственный сотрудник id_С; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Ответственный сотрудник" ALTER COLUMN "id_С" SET DEFAULT nextval('public."Ответственный сотрудник_id_С_seq"'::regclass);
+
+
+--
+-- TOC entry 4832 (class 2604 OID 17500)
+-- Name: Подразделение id_П; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Подразделение" ALTER COLUMN "id_П" SET DEFAULT nextval('public."Подразделение_id_П_seq"'::regclass);
+
+
+--
+-- TOC entry 4844 (class 2604 OID 17737)
+-- Name: Связь_Угроза_Уязвимость id_СВ; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Связь_Угроза_Уязвимость" ALTER COLUMN "id_СВ" SET DEFAULT nextval('public."Связь_Угроза_Уязвимость_id_СВ_seq"'::regclass);
+
+
+--
+-- TOC entry 4845 (class 2604 OID 17757)
+-- Name: Связь_Уязвимость_Инцидент id_СВ; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Связь_Уязвимость_Инцидент" ALTER COLUMN "id_СВ" SET DEFAULT nextval('public."Связь_Уязвимость_Инцидент_id_СВ_seq"'::regclass);
+
+
+--
+-- TOC entry 4838 (class 2604 OID 17570)
+-- Name: Способ обнаружения id_СО; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Способ обнаружения" ALTER COLUMN "id_СО" SET DEFAULT nextval('public."Способ обнаружения_id_СО_seq"'::regclass);
+
+
+--
+-- TOC entry 4830 (class 2604 OID 17478)
+-- Name: Тип ИА id_ТипИА; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Тип ИА" ALTER COLUMN "id_ТипИА" SET DEFAULT nextval('public."Тип ИА_id_ТипИА_seq"'::regclass);
+
+
+--
+-- TOC entry 4835 (class 2604 OID 17537)
+-- Name: Тип Способа обнаружения id_ТипСО; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Тип Способа обнаружения" ALTER COLUMN "id_ТипСО" SET DEFAULT nextval('public."Тип Способа обнаружения_id_ТипСО_seq"'::regclass);
+
+
+--
+-- TOC entry 4837 (class 2604 OID 17559)
+-- Name: Угроза id_УГ; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Угроза" ALTER COLUMN "id_УГ" SET DEFAULT nextval('public."Угроза_id_УГ_seq"'::regclass);
+
+
+--
+-- TOC entry 4834 (class 2604 OID 17526)
+-- Name: Уровень критичности id_УК; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Уровень критичности" ALTER COLUMN "id_УК" SET DEFAULT nextval('public."Уровень критичности_id_УК_seq"'::regclass);
+
+
+--
+-- TOC entry 4842 (class 2604 OID 17654)
+-- Name: Уязвимость id_У; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Уязвимость" ALTER COLUMN "id_У" SET DEFAULT nextval('public."Уязвимость_id_У_seq"'::regclass);
+
+
+--
+-- TOC entry 5050 (class 0 OID 17512)
+-- Dependencies: 226
+-- Data for Name: Вектор угрозы; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Вектор угрозы" ("id_ВУ", "Название", "Описание") FROM stdin;
+1	Сетевой	Угроза, реализуемая через сетевые протоколы
+2	Локальный	Угроза, реализуемая при физическом доступе
+3	Человеческий	Угроза, связанная с действиями сотрудников
+4	Программный	Угроза, реализуемая через программные уязвимости
+5	Аппаратный	Угроза, связанная с аппаратными закладками
+\.
+
+
+--
+-- TOC entry 5046 (class 0 OID 17486)
+-- Dependencies: 222
+-- Data for Name: Должность; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Должность" ("id_Д", "Название", "Описание") FROM stdin;
+1	Специалист по ИБ	Сотрудник отдела информационной безопасности
+2	Аналитик ИБ	Аналитик угроз и уязвимостей
+3	Руководитель отдела ИБ	Руководитель подразделения информационной безопасности
+4	Системный администратор	Администратор серверной инфраструктуры
+5	DevOps инженер	Инженер по автоматизации развертывания
+6	Технический писатель	Документирование инструкций и регламентов
+\.
+
+
+--
+-- TOC entry 5056 (class 0 OID 17545)
+-- Dependencies: 232
+-- Data for Name: Инструкции для системы; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Инструкции для системы" ("id_ИС", "Описание") FROM stdin;
+1	Обновить серверное ПО до актуальной версии
+2	Настроить межсетевой экран согласно политике ИБ
+3	Провести аудит прав доступа на сервере
+4	Установить патч безопасности от производителя
+5	Изменить пароль администратора на сложный
+6	Ограничить доступ к порту 3389
+7	Включить двухфакторную аутентификацию
+8	Провести антивирусное сканирование
+\.
+
+
+--
+-- TOC entry 5064 (class 0 OID 17603)
+-- Dependencies: 240
+-- Data for Name: Информационный актив; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Информационный актив" ("id_ИА", "Название", "Дата создания", "Описание", "Дата последнего изменения", "id_ТипИА") FROM stdin;
+1	Веб сервер портала	2024-06-10	Основной веб-сервер корпоративного портала	2025-10-01	1
+2	Сервер приложений 1	2025-01-15	Сервер приложений для бизнес-систем	2025-09-15	1
+3	СУБД PostgreSQL	2025-03-20	Основная база данных на PostgreSQL	2025-11-01	4
+4	Сервер виртуальный DEV	2025-06-01	Виртуальный сервер среды разработки	2025-08-20	2
+5	Сервер виртуальный PROD	2025-07-01	Виртуальный сервер продуктивной среды	2025-12-01	2
+6	Сервер виртуальный TEST	2025-06-15	Виртуальный сервер тестирования	2025-10-10	2
+7	Контроллер домена	2024-10-01	Контроллер домена Active Directory	2025-11-20	1
+8	Почтовый сервер	2024-07-01	Корпоративный почтовый сервер	2025-09-01	1
+9	Антивирусный сервер	2025-02-10	Центр управления антивирусной защитой	2025-08-01	1
+10	Сервер мониторинга	2025-03-15	Система мониторинга Zabbix	2025-10-05	1
+11	Сервер резервного копирования	2024-12-01	Система резервного копирования Veeam	2025-11-10	1
+12	СУБД MySQL	2025-04-01	Дополнительная база данных на MySQL	2025-09-20	4
+13	Контейнерная платформа	2025-08-01	Платформа для контейнеров Docker	2025-11-15	2
+14	Сервер приложений 2	2025-05-10	Резервный сервер приложений	2025-10-20	1
+15	Сервер RDP	2025-01-20	Сервер для удаленных подключений	2025-08-15	1
+16	Рабочая станция DevOps	2025-09-05	Рабочая станция инженера DevOps	2025-11-25	6
+\.
+
+
+--
+-- TOC entry 5070 (class 0 OID 17701)
+-- Dependencies: 246
+-- Data for Name: Инцидент; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Инцидент" ("id_И", "Название", "id_С", "id_ИА", "Статус устранения", "Дата обнаружения", "Дата устранения") FROM stdin;
+1	CVE-2024-1234 вторжение	1	1	Устранён	2026-05-01	2026-05-08
+2	Недостаточная фильтрация трафика	2	2	Устранён	2026-05-02	2026-05-09
+3	DDoS атака на портал	3	3	Устранён	2026-05-03	2026-05-10
+4	Отказ в обслуживании DNS	4	4	Устранён	2026-05-04	2026-05-11
+5	Подбор пароля администратора	5	5	В процессе	2026-05-05	\N
+6	Утечка данных через email	6	6	В процессе	2026-05-06	\N
+7	Открытый порт RDP	7	7	В процессе	2026-05-07	\N
+8	Подозрительный трафик	8	8	В процессе	2026-05-08	\N
+9	Устаревшая база антивируса	9	9	Новый	2026-05-09	\N
+10	CVE-2024-2222 VMware	1	1	Устранён	2026-05-10	2026-05-17
+11	CVE-2024-1111 Exchange	2	2	В процессе	2026-05-11	\N
+12	CVE-2024-9012 Cisco IOS	3	3	В процессе	2026-05-12	\N
+13	CVE-2024-7890 Oracle DB	4	4	Новый	2026-05-13	\N
+14	CVE-2024-3456 Linux Kernel	5	5	В процессе	2026-05-14	\N
+15	CVE-2024-5678 Apache	6	6	Устранён	2026-05-15	2026-05-22
+16	CVE-2024-1234 повторно	7	7	Новый	2026-05-16	\N
+17	CVE-2024-2222 повторно	8	8	Устранён	2026-05-17	2026-05-24
+18	CVE-2024-1111 повторно	9	9	В процессе	2026-05-18	\N
+19	CVE-2024-9012 повторно	1	1	Устранён	2026-05-19	2026-05-26
+20	CVE-2024-7890 повторно	2	2	В процессе	2026-05-20	\N
+21	CVE-2024-3456 повторно	3	3	Устранён	2026-05-21	2026-05-28
+22	CVE-2024-5678 повторно	4	4	В процессе	2026-05-22	\N
+23	Атака на SQL инъекцию	5	5	Новый	2026-05-23	\N
+24	Фишинговая атака	6	6	В процессе	2026-05-24	\N
+25	Brute force на SSH	7	7	Устранён	2026-05-25	2026-06-01
+26	Критическая уязвимость в Windows	8	8	В процессе	2026-05-26	\N
+27	Уязвимость в Docker	9	9	Новый	2026-05-27	\N
+28	Атака на почтовый сервер	1	1	В процессе	2026-05-28	\N
+29	Критическая уязвимость в Kafka	2	2	Устранён	2026-05-29	2026-06-05
+30	Атака на внутренний DNS	3	3	В процессе	2026-05-30	\N
+31	Утечка токенов доступа	4	4	Новый	2026-05-31	\N
+32	Сетевая атака на портал	5	5	В процессе	2026-06-01	\N
+33	Атака на web-приложение	6	6	Устранён	2026-06-02	2026-06-09
+\.
+
+
+--
+-- TOC entry 5062 (class 0 OID 17584)
+-- Dependencies: 238
+-- Data for Name: Меры устранения; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Меры устранения" ("id_МУ", "id_ИС", "Название", "Описание", "Плановая дата устранения", "Фактическая дата устранения") FROM stdin;
+3	1	Обновление ПО	Обновить Apache до версии 2.4.58	2026-06-01	2026-05-28
+4	2	Настройка Firewall	Ограничить входящие соединения на порты	2026-06-10	2026-07-10
+5	3	Аудит прав	Провести аудит прав пользователей	2026-05-20	2026-05-18
+6	4	Установка патча	Установить критический патч Windows	2026-05-25	2026-05-24
+7	5	Смена пароля	Сменить пароль на сложный	2026-04-15	2026-04-14
+8	6	Блокировка порта	Закрыть порт RDP для внешних сетей	2026-05-30	2026-06-05
+9	7	2FA включение	Включить двухфакторную аутентификацию	2026-06-20	2026-06-23
+10	8	Антивирусная проверк	Провести полное сканирование сервера	2026-05-05	2026-05-04
+\.
+
+
+--
+-- TOC entry 5066 (class 0 OID 17621)
+-- Dependencies: 242
+-- Data for Name: Ответственный сотрудник; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Ответственный сотрудник" ("id_С", "Имя", "Фамилия", "Отчество", "Дата рождения", "id_Д", "id_П", email, "Номер телефона", "Логин", "Хэш пароля") FROM stdin;
+1	Мария	Козлова	Александровна	1995-03-15	1	1	m.kozlova@company.ru	79011234567	mkozlova	a1b2c3d4e5f67890
+2	Алексей	Сидоров	Иванович	1988-07-22	2	1	a.sidorov@company.ru	79022345678	asidorov	b2c3d4e5f67890a1
+3	Елена	Морозова	Дмитриевна	1992-11-05	1	1	e.morozova@company.ru	79033456789	emorozova	c3d4e5f67890a1b2
+4	Виктор	Козлов	Борисович	1985-09-12	3	1	v.kozlov@company.ru	79044567890	vkozlov	d4e5f67890a1b2c3
+5	Дмитрий	Новиков	Павлович	1990-12-01	2	1	d.novikov@company.ru	79055678901	dnovikov	e5f67890a1b2c3d4
+6	Иван	Петров	Сергеевич	1993-05-18	4	2	i.petrov@company.ru	79066789012	ipetrov	f67890a1b2c3d4e5
+7	Ольга	Смирнова	Алексеевна	1987-03-25	5	2	o.smirnova@company.ru	79077890123	osmirnova	67890a1b2c3d4e5f6
+8	Анна	Федорова	Сергеевна	1991-08-14	1	1	a.fedorova@company.ru	79088901234	afedorova	7890a1b2c3d4e5f678
+9	Константин	Павлов	Дмитриевич	1986-04-09	5	3	k.pavlov@company.ru	79099012345	kpavlov	890a1b2c3d4e5f6789
+10	Кристина	Захарова	Даниловна	1994-06-30	2	1	k.zaharova@company.ru	79100123456	kzaharova	90a1b2c3d4e5f67890
+11	Егор	Игорев	Станиславович	1989-02-14	4	2	e.igorev@company.ru	79111234567	eigorev	0a1b2c3d4e5f67890a
+12	Владимир	Григорьев	Олегович	1992-10-28	2	1	v.grigoryev@company.ru	79122345678	vgrigoryev	a1b2c3d4e5f67890ab
+13	Татьяна	Андреева	Викторовна	1987-01-15	3	3	t.andreeva@company.ru	79133456789	tandreeva	b2c3d4e5f67890abc
+14	Максим	Соколов	Петрович	1993-12-03	1	1	m.sokolov@company.ru	79144567890	msokolov	c3d4e5f67890abcd
+\.
+
+
+--
+-- TOC entry 5048 (class 0 OID 17497)
+-- Dependencies: 224
+-- Data for Name: Подразделение; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Подразделение" ("id_П", "Название", "Описание", "Адрес", "Номер телефона", email) FROM stdin;
+1	Отдел ИБ	Отдел информационной безопасности	ул. Ленина, 10	81234567890	ib@company.ru
+2	ИТ отдел	Отдел информационных технологий	ул. Ленина, 10	81234567891	it@company.ru
+3	Отдел разработки	Отдел разработки ПО	ул. Ленина, 10	81234567892	dev@company.ru
+4	Административный отдел	Хозяйственно-административная служба	ул. Ленина, 10	81234567893	admin@company.ru
+\.
+
+
+--
+-- TOC entry 5072 (class 0 OID 17734)
+-- Dependencies: 248
+-- Data for Name: Связь_Угроза_Уязвимость; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Связь_Угроза_Уязвимость" ("id_СВ", "id_У", "id_УГ") FROM stdin;
+21	16	1
+22	17	1
+23	18	2
+24	19	3
+25	20	4
+26	21	5
+27	22	6
+28	23	7
+29	24	8
+30	25	9
+31	26	10
+32	27	11
+33	28	12
+34	29	13
+35	30	14
+36	16	2
+37	17	3
+38	18	4
+39	19	5
+40	20	6
+\.
+
+
+--
+-- TOC entry 5074 (class 0 OID 17754)
+-- Dependencies: 250
+-- Data for Name: Связь_Уязвимость_Инцидент; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Связь_Уязвимость_Инцидент" ("id_СВ", "id_У", "id_И") FROM stdin;
+21	16	1
+22	17	2
+23	18	3
+24	19	4
+25	20	5
+26	21	6
+27	22	7
+28	23	8
+29	24	9
+30	25	10
+31	26	11
+32	27	12
+33	28	13
+34	29	14
+35	30	15
+36	16	16
+37	25	17
+38	26	18
+39	27	19
+40	28	20
+\.
+
+
+--
+-- TOC entry 5060 (class 0 OID 17567)
+-- Dependencies: 236
+-- Data for Name: Способ обнаружения; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Способ обнаружения" ("id_СО", "Название", "id_ТипСО", "Дата последнего сканирования", "Дата последнего обнаружения") FROM stdin;
+1	Nessus Scanner	1	2026-05-15	2026-05-10
+2	OpenVAS	1	2026-05-12	2026-05-08
+3	Ручной пентест	2	2026-04-20	2026-04-25
+4	SIEM анализ	3	2026-05-01	2026-05-02
+5	Wireshark трафик	3	2026-04-28	2026-05-01
+6	Tenable IO	1	2026-05-14	2026-05-09
+\.
+
+
+--
+-- TOC entry 5044 (class 0 OID 17475)
+-- Dependencies: 220
+-- Data for Name: Тип ИА; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Тип ИА" ("id_ТипИА", "Название", "Описание") FROM stdin;
+1	Сервер физический	Физический сервер в дата-центре
+2	Сервер виртуальный	Виртуальная машина на гипервизоре
+3	Сетевое оборудование	Маршрутизаторы, коммутаторы, межсетевые экраны
+4	СУБД	Система управления базами данных
+5	Облачный сервис	Облачные ресурсы AWS/Azure
+6	Рабочая станция	Пользовательские ПК и ноутбуки
+\.
+
+
+--
+-- TOC entry 5054 (class 0 OID 17534)
+-- Dependencies: 230
+-- Data for Name: Тип Способа обнаружения; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Тип Способа обнаружения" ("id_ТипСО", "Название", "Описание") FROM stdin;
+1	Автоматический	Обнаружение с помощью сканеров безопасности
+2	Ручной	Обнаружение вручную пентестерами
+3	Логический	Обнаружение через анализ логов
+4	Аналитический	Обнаружение через анализ трафика
+\.
+
+
+--
+-- TOC entry 5058 (class 0 OID 17556)
+-- Dependencies: 234
+-- Data for Name: Угроза; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Угроза" ("id_УГ", "Название", "Описание") FROM stdin;
+1	CVE-2024-1234	Уязвимость в веб-сервере Apache
+2	CVE-2024-5678	Уязвимость в почтовом сервере
+3	CVE-2024-9012	Уязвимость в системе управления базами данных
+4	CVE-2024-3456	Уязвимость в VPN-клиенте
+5	CVE-2024-7890	Уязвимость в операционной системе Windows
+6	CVE-2024-1111	Уязвимость в Python библиотеке
+7	CVE-2024-2222	Уязвимость в антивирусном решении
+8	CVE-2024-3333	Уязвимость в веб-сервере Nginx
+9	CVE-2024-4444	Уязвимость в Docker контейнере
+10	CVE-2024-5555	Уязвимость в системе мониторинга Zabbix
+11	CVE-2024-6666	Уязвимость в гипервизоре VMware
+12	CVE-2024-7777	Уязвимость в Active Directory
+13	CVE-2024-8888	Уязвимость в почтовом клиенте Outlook
+14	CVE-2024-9999	Уязвимость в системе резервного копирования
+\.
+
+
+--
+-- TOC entry 5052 (class 0 OID 17523)
+-- Dependencies: 228
+-- Data for Name: Уровень критичности; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Уровень критичности" ("id_УК", "Название", "Описание") FROM stdin;
+1	Низкий	Незначительная угроза, не требует срочного вмешательства
+2	Средний	Умеренная угроза, требует планового устранения
+3	Высокий	Серьезная угроза, требует оперативного реагирования
+4	Критический	Критическая угроза, требует немедленного устранения
+\.
+
+
+--
+-- TOC entry 5068 (class 0 OID 17651)
+-- Dependencies: 244
+-- Data for Name: Уязвимость; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Уязвимость" ("id_У", "Название", "Время события", "id_МУ", "id_УК", "id_СО", "id_ВУ", "Дата регистрации", "Описание") FROM stdin;
+16	Недостаточная фильтрация	2026-05-10 14:30:00	3	3	1	1	2026-05-10	Возможность SQL-инъекции через параметры
+17	Устаревшая версия OpenSSL	2026-05-12 09:15:00	4	4	1	1	2026-05-12	Критическая уязвимость шифрования
+18	Отказ в обслуживании DNS	2026-05-08 11:20:00	5	3	2	1	2026-05-09	Уязвимость к DDoS-атакам
+19	Подбор пароля админа	2026-05-14 16:45:00	6	3	3	2	2026-05-15	Слабый пароль администратора
+20	Утечка данных через email	2026-05-01 08:30:00	7	2	4	3	2026-05-02	Отправка конфиденциальных данных
+21	DDoS атака на портал	2026-05-17 13:00:00	8	4	1	1	2026-05-17	Распределенная DDoS-атака
+22	Открытый порт RDP	2026-05-19 10:10:00	8	3	1	1	2026-05-19	Доступ к RDP из интернета
+23	Подозрительный трафик	2026-05-11 22:00:00	9	2	4	1	2026-05-12	Аномальный сетевой трафик
+24	Устаревшая база антивируса	2026-05-03 04:20:00	10	1	2	4	2026-05-04	Антивирусные базы устарели
+25	CVE-2024-2222 VMware	2026-05-20 12:00:00	6	4	1	1	2026-05-20	Уязвимость в VMware ESXi
+26	CVE-2024-1111 Exchange	2026-05-22 15:30:00	3	4	1	1	2026-05-22	Уязвимость в Microsoft Exchange
+27	CVE-2024-9012 Cisco IOS	2026-05-16 08:45:00	4	3	2	1	2026-05-16	Уязвимость в Cisco IOS
+28	CVE-2024-7890 Oracle DB	2026-05-18 14:20:00	5	3	1	1	2026-05-18	Уязвимость в Oracle Database
+29	CVE-2024-3456 Linux Kernel	2026-05-21 09:50:00	7	3	2	1	2026-05-21	Уязвимость в ядре Linux
+30	CVE-2024-5678 Apache	2026-05-13 17:10:00	3	3	1	1	2026-05-13	Уязвимость в Apache HTTP Server
+\.
+
+
+--
+-- TOC entry 5096 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: Вектор угрозы_id_ВУ_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Вектор угрозы_id_ВУ_seq"', 5, true);
+
+
+--
+-- TOC entry 5097 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: Должность_id_Д_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Должность_id_Д_seq"', 6, true);
+
+
+--
+-- TOC entry 5098 (class 0 OID 0)
+-- Dependencies: 231
+-- Name: Инструкции для системы_id_ИС_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Инструкции для системы_id_ИС_seq"', 8, true);
+
+
+--
+-- TOC entry 5099 (class 0 OID 0)
+-- Dependencies: 239
+-- Name: Информационный актив_id_ИА_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Информационный актив_id_ИА_seq"', 16, true);
+
+
+--
+-- TOC entry 5100 (class 0 OID 0)
+-- Dependencies: 245
+-- Name: Инцидент_id_И_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Инцидент_id_И_seq"', 33, true);
+
+
+--
+-- TOC entry 5101 (class 0 OID 0)
+-- Dependencies: 237
+-- Name: Меры устранения_id_МУ_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Меры устранения_id_МУ_seq"', 10, true);
+
+
+--
+-- TOC entry 5102 (class 0 OID 0)
+-- Dependencies: 241
+-- Name: Ответственный сотрудник_id_С_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Ответственный сотрудник_id_С_seq"', 14, true);
+
+
+--
+-- TOC entry 5103 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: Подразделение_id_П_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Подразделение_id_П_seq"', 4, true);
+
+
+--
+-- TOC entry 5104 (class 0 OID 0)
+-- Dependencies: 247
+-- Name: Связь_Угроза_Уязвимость_id_СВ_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Связь_Угроза_Уязвимость_id_СВ_seq"', 40, true);
+
+
+--
+-- TOC entry 5105 (class 0 OID 0)
+-- Dependencies: 249
+-- Name: Связь_Уязвимость_Инцидент_id_СВ_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Связь_Уязвимость_Инцидент_id_СВ_seq"', 40, true);
+
+
+--
+-- TOC entry 5106 (class 0 OID 0)
+-- Dependencies: 235
+-- Name: Способ обнаружения_id_СО_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Способ обнаружения_id_СО_seq"', 6, true);
+
+
+--
+-- TOC entry 5107 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: Тип ИА_id_ТипИА_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Тип ИА_id_ТипИА_seq"', 6, true);
+
+
+--
+-- TOC entry 5108 (class 0 OID 0)
+-- Dependencies: 229
+-- Name: Тип Способа обнаружения_id_ТипСО_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Тип Способа обнаружения_id_ТипСО_seq"', 4, true);
+
+
+--
+-- TOC entry 5109 (class 0 OID 0)
+-- Dependencies: 233
+-- Name: Угроза_id_УГ_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Угроза_id_УГ_seq"', 14, true);
+
+
+--
+-- TOC entry 5110 (class 0 OID 0)
+-- Dependencies: 227
+-- Name: Уровень критичности_id_УК_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Уровень критичности_id_УК_seq"', 4, true);
+
+
+--
+-- TOC entry 5111 (class 0 OID 0)
+-- Dependencies: 243
+-- Name: Уязвимость_id_У_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Уязвимость_id_У_seq"', 30, true);
+
+
+--
+-- TOC entry 4856 (class 2606 OID 17521)
+-- Name: Вектор угрозы Вектор угрозы_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Вектор угрозы"
+    ADD CONSTRAINT "Вектор угрозы_pkey" PRIMARY KEY ("id_ВУ");
+
+
+--
+-- TOC entry 4852 (class 2606 OID 17495)
+-- Name: Должность Должность_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Должность"
+    ADD CONSTRAINT "Должность_pkey" PRIMARY KEY ("id_Д");
+
+
+--
+-- TOC entry 4862 (class 2606 OID 17554)
+-- Name: Инструкции для системы Инструкции для системы_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Инструкции для системы"
+    ADD CONSTRAINT "Инструкции для системы_pkey" PRIMARY KEY ("id_ИС");
+
+
+--
+-- TOC entry 4870 (class 2606 OID 17614)
+-- Name: Информационный актив Информационный актив_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Информационный актив"
+    ADD CONSTRAINT "Информационный актив_pkey" PRIMARY KEY ("id_ИА");
+
+
+--
+-- TOC entry 4876 (class 2606 OID 17712)
+-- Name: Инцидент Инцидент_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Инцидент"
+    ADD CONSTRAINT "Инцидент_pkey" PRIMARY KEY ("id_И");
+
+
+--
+-- TOC entry 4868 (class 2606 OID 17596)
+-- Name: Меры устранения Меры устранения_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Меры устранения"
+    ADD CONSTRAINT "Меры устранения_pkey" PRIMARY KEY ("id_МУ");
+
+
+--
+-- TOC entry 4872 (class 2606 OID 17638)
+-- Name: Ответственный сотрудник Ответственный сотрудник_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Ответственный сотрудник"
+    ADD CONSTRAINT "Ответственный сотрудник_pkey" PRIMARY KEY ("id_С");
+
+
+--
+-- TOC entry 4854 (class 2606 OID 17510)
+-- Name: Подразделение Подразделение_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Подразделение"
+    ADD CONSTRAINT "Подразделение_pkey" PRIMARY KEY ("id_П");
+
+
+--
+-- TOC entry 4878 (class 2606 OID 17742)
+-- Name: Связь_Угроза_Уязвимость Связь_Угроза_Уязвимость_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Связь_Угроза_Уязвимость"
+    ADD CONSTRAINT "Связь_Угроза_Уязвимость_pkey" PRIMARY KEY ("id_СВ");
+
+
+--
+-- TOC entry 4880 (class 2606 OID 17762)
+-- Name: Связь_Уязвимость_Инцидент Связь_Уязвимость_Инцидент_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Связь_Уязвимость_Инцидент"
+    ADD CONSTRAINT "Связь_Уязвимость_Инцидент_pkey" PRIMARY KEY ("id_СВ");
+
+
+--
+-- TOC entry 4866 (class 2606 OID 17577)
+-- Name: Способ обнаружения Способ обнаружения_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Способ обнаружения"
+    ADD CONSTRAINT "Способ обнаружения_pkey" PRIMARY KEY ("id_СО");
+
+
+--
+-- TOC entry 4850 (class 2606 OID 17484)
+-- Name: Тип ИА Тип ИА_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Тип ИА"
+    ADD CONSTRAINT "Тип ИА_pkey" PRIMARY KEY ("id_ТипИА");
+
+
+--
+-- TOC entry 4860 (class 2606 OID 17543)
+-- Name: Тип Способа обнаружения Тип Способа обнаружения_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Тип Способа обнаружения"
+    ADD CONSTRAINT "Тип Способа обнаружения_pkey" PRIMARY KEY ("id_ТипСО");
+
+
+--
+-- TOC entry 4864 (class 2606 OID 17565)
+-- Name: Угроза Угроза_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Угроза"
+    ADD CONSTRAINT "Угроза_pkey" PRIMARY KEY ("id_УГ");
+
+
+--
+-- TOC entry 4858 (class 2606 OID 17532)
+-- Name: Уровень критичности Уровень критичности_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Уровень критичности"
+    ADD CONSTRAINT "Уровень критичности_pkey" PRIMARY KEY ("id_УК");
+
+
+--
+-- TOC entry 4874 (class 2606 OID 17666)
+-- Name: Уязвимость Уязвимость_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Уязвимость"
+    ADD CONSTRAINT "Уязвимость_pkey" PRIMARY KEY ("id_У");
+
+
+--
+-- TOC entry 4883 (class 2606 OID 17615)
+-- Name: Информационный актив fk_актив_тип; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Информационный актив"
+    ADD CONSTRAINT "fk_актив_тип" FOREIGN KEY ("id_ТипИА") REFERENCES public."Тип ИА"("id_ТипИА");
+
+
+--
+-- TOC entry 4890 (class 2606 OID 17718)
+-- Name: Инцидент fk_инцидент_актив; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Инцидент"
+    ADD CONSTRAINT "fk_инцидент_актив" FOREIGN KEY ("id_ИА") REFERENCES public."Информационный актив"("id_ИА");
+
+
+--
+-- TOC entry 4891 (class 2606 OID 17713)
+-- Name: Инцидент fk_инцидент_сотрудник; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Инцидент"
+    ADD CONSTRAINT "fk_инцидент_сотрудник" FOREIGN KEY ("id_С") REFERENCES public."Ответственный сотрудник"("id_С");
+
+
+--
+-- TOC entry 4882 (class 2606 OID 17597)
+-- Name: Меры устранения fk_меры_инструкции; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Меры устранения"
+    ADD CONSTRAINT "fk_меры_инструкции" FOREIGN KEY ("id_ИС") REFERENCES public."Инструкции для системы"("id_ИС");
+
+
+--
+-- TOC entry 4894 (class 2606 OID 17768)
+-- Name: Связь_Уязвимость_Инцидент fk_связь2_инцидент; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Связь_Уязвимость_Инцидент"
+    ADD CONSTRAINT "fk_связь2_инцидент" FOREIGN KEY ("id_И") REFERENCES public."Инцидент"("id_И");
+
+
+--
+-- TOC entry 4895 (class 2606 OID 17763)
+-- Name: Связь_Уязвимость_Инцидент fk_связь2_уязвимость; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Связь_Уязвимость_Инцидент"
+    ADD CONSTRAINT "fk_связь2_уязвимость" FOREIGN KEY ("id_У") REFERENCES public."Уязвимость"("id_У");
+
+
+--
+-- TOC entry 4892 (class 2606 OID 17748)
+-- Name: Связь_Угроза_Уязвимость fk_связь_угроза; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Связь_Угроза_Уязвимость"
+    ADD CONSTRAINT "fk_связь_угроза" FOREIGN KEY ("id_УГ") REFERENCES public."Угроза"("id_УГ");
+
+
+--
+-- TOC entry 4893 (class 2606 OID 17743)
+-- Name: Связь_Угроза_Уязвимость fk_связь_уязвимость; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Связь_Угроза_Уязвимость"
+    ADD CONSTRAINT "fk_связь_уязвимость" FOREIGN KEY ("id_У") REFERENCES public."Уязвимость"("id_У");
+
+
+--
+-- TOC entry 4884 (class 2606 OID 17639)
+-- Name: Ответственный сотрудник fk_сотрудник_должность; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Ответственный сотрудник"
+    ADD CONSTRAINT "fk_сотрудник_должность" FOREIGN KEY ("id_Д") REFERENCES public."Должность"("id_Д");
+
+
+--
+-- TOC entry 4885 (class 2606 OID 17644)
+-- Name: Ответственный сотрудник fk_сотрудник_подразделение; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Ответственный сотрудник"
+    ADD CONSTRAINT "fk_сотрудник_подразделение" FOREIGN KEY ("id_П") REFERENCES public."Подразделение"("id_П");
+
+
+--
+-- TOC entry 4881 (class 2606 OID 17578)
+-- Name: Способ обнаружения fk_способ_тип; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Способ обнаружения"
+    ADD CONSTRAINT "fk_способ_тип" FOREIGN KEY ("id_ТипСО") REFERENCES public."Тип Способа обнаружения"("id_ТипСО");
+
+
+--
+-- TOC entry 4886 (class 2606 OID 17682)
+-- Name: Уязвимость fk_уязвимость_вектор; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Уязвимость"
+    ADD CONSTRAINT "fk_уязвимость_вектор" FOREIGN KEY ("id_ВУ") REFERENCES public."Вектор угрозы"("id_ВУ");
+
+
+--
+-- TOC entry 4887 (class 2606 OID 17672)
+-- Name: Уязвимость fk_уязвимость_критичность; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Уязвимость"
+    ADD CONSTRAINT "fk_уязвимость_критичность" FOREIGN KEY ("id_УК") REFERENCES public."Уровень критичности"("id_УК");
+
+
+--
+-- TOC entry 4888 (class 2606 OID 17667)
+-- Name: Уязвимость fk_уязвимость_меры; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Уязвимость"
+    ADD CONSTRAINT "fk_уязвимость_меры" FOREIGN KEY ("id_МУ") REFERENCES public."Меры устранения"("id_МУ");
+
+
+--
+-- TOC entry 4889 (class 2606 OID 17677)
+-- Name: Уязвимость fk_уязвимость_способ; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Уязвимость"
+    ADD CONSTRAINT "fk_уязвимость_способ" FOREIGN KEY ("id_СО") REFERENCES public."Способ обнаружения"("id_СО");
+
+
+-- Completed on 2026-05-23 23:36:49
+
+--
+-- PostgreSQL database dump complete
+--
+
+\unrestrict 0as7zf1RK4ws1vD2KDr4jj0kI3UsOtJwf1xNTIS6byvbhk5R3KB5FexWTP0MC1X
+
